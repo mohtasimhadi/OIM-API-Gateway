@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from routers import upload
+from routers import upload, analysis
 
 app = FastAPI()
 
@@ -15,7 +15,9 @@ app.add_middleware(
 
 # Include routers
 app.include_router(upload.router, prefix="/upload", tags=["Upload"])
+app.include_router(analysis.router, prefix="/data", tags=["Analysis"])
 
 if __name__ == "__main__":
     import uvicorn
+    print("Registered routers:", app.routes)
     uvicorn.run(app, host="0.0.0.0", port=8080)
