@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from routers import upload, analysis
+from routers import upload, analysis, view
 
 app = FastAPI()
 
@@ -16,6 +16,7 @@ app.add_middleware(
 # Include routers
 app.include_router(upload.router, prefix="/upload", tags=["Upload"])
 app.include_router(analysis.router, prefix="/data", tags=["Analysis"])
+app.include_router(view.router, prefix="/view", tags=["Analysis"])
 
 if __name__ == "__main__":
     import uvicorn
