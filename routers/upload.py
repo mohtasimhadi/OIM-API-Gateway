@@ -17,14 +17,12 @@ async def upload_videos(
             file_path = file_utils.save_upload_file(file)
             response_data = external_api.upload_video(file_path)
             unique_id = response_data.get("unique_id")
-
             analysis_result = external_api.request_analysis(unique_id)
-
             analysis = {
                 'video_id': unique_id,
                 'bed_number': bedNumbers[idx],
                 'collection_date': collectionDates[idx],
-                'plants': set([data['class_name'] for data in analysis['track_data']]),
+                'plants': list(set([data['class_name'] for data in analysis_result['track_data']])),
                 'analysis': analysis_result,
             }
             db_utils.insert_analysis(analysis)

@@ -18,7 +18,7 @@ def get_analysis_by_video_id(video_id: str) -> dict:
 def get_all_analysis_summaries() -> list:
     summaries = []
     try:
-        cursor = collection.find({}, {"video_id": 1, "bed_number": 1, "collection_date": 1})
+        cursor = collection.find({}, {"video_id": 1, "bed_number": 1, "collection_date": 1, "plants": 1})
         for document in cursor:
             summaries.append({
                 "video_id": document.get("video_id"),
