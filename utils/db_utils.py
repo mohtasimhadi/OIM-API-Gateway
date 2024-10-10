@@ -1,6 +1,7 @@
 from pymongo import MongoClient
+from utils.config import Config
 
-client = MongoClient("mongodb://localhost:27017/")
+client = MongoClient(Config.MONGODB_URI)
 db = client["OIM"]
 collection = db["analysis"]
 

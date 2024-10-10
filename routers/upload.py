@@ -14,17 +14,12 @@ async def upload_videos(
 ):
     try:
         for idx, file in enumerate(files):
-            # Save file locally
             file_path = file_utils.save_upload_file(file)
-
-            # Send file to external API
-            response_data = external_api.send_file_to_external_api(file_path)
+            response_data = external_api.upload_video(file_path)
             unique_id = response_data.get("unique_id")
 
-            # Request analysis from external API
             analysis_result = external_api.request_analysis(unique_id)
 
-            # Insert data to MongoDB
             analysis = {
                 'video_id': unique_id,
                 'bed_number': bedNumbers[idx],
@@ -33,7 +28,6 @@ async def upload_videos(
             }
             db_utils.insert_analysis(analysis)
 
-            # Clean up saved file
             file_utils.remove_file(file_path)
 
         return JSONResponse(content={"message": "success"}, status_code=200, media_type="application/json")
