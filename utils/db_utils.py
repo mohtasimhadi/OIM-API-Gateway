@@ -18,7 +18,6 @@ def get_analysis_by_video_id(video_id: str) -> dict:
 def get_all_analysis_summaries() -> list:
     summaries = []
     try:
-        print("Attempting to connect to MongoDB...")
         cursor = collection.find({}, {"video_id": 1, "bed_number": 1, "collection_date": 1})
         for document in cursor:
             summaries.append({
@@ -27,7 +26,6 @@ def get_all_analysis_summaries() -> list:
                 "collection_date": document.get("collection_date"),
                 "plants": document.get("plants")
             })
-        print("Summaries fetched from MongoDB:", summaries)
     except Exception as e:
         print("Error while fetching summaries:", e)
     return summaries
