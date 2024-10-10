@@ -24,6 +24,7 @@ async def upload_videos(
                 'video_id': unique_id,
                 'bed_number': bedNumbers[idx],
                 'collection_date': collectionDates[idx],
+                'plants': set([data['class_name'] for data in analysis['track_data']]),
                 'analysis': analysis_result,
             }
             db_utils.insert_analysis(analysis)
