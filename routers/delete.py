@@ -21,7 +21,7 @@ async def delete_analysis(video_id: str):
         print(response)
         for i, track_data in enumerate(analysis_data['analysis']['track_data']):
             response = external_api.delete_image(track_data['image'])
-            print(f"Deleted {i+1}/{len(track_data)} tracked images.")
+            print(f"Deleted {i+1}/{len(analysis_data['analysis']['track_data'])} tracked images.")
         
         return JSONResponse(content={"success": True}, status_code=200)
     return JSONResponse(content={"success": False}, status_code=404)

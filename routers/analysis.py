@@ -13,5 +13,5 @@ async def get_analysis_summaries():
 async def get_analysis(video_id: str):
     analysis_data = db_utils.get_analysis_by_video_id(video_id)
     if not analysis_data:
-        raise JSONResponse(content={"message": "Analysis not found"}, status_code=404, detail="Analysis not found")
+        raise JSONResponse(content={"message": "Analysis not found"}, status_code=404)
     return JSONResponse(content=analysis_data, status_code=200, media_type="application/json")
