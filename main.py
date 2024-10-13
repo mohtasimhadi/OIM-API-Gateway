@@ -1,7 +1,7 @@
 import socket
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from routers import upload, analysis, view
+from routers import upload, analysis, view, delete
 
 app = FastAPI()
 app.add_middleware(
@@ -15,6 +15,7 @@ app.add_middleware(
 app.include_router(upload.router, prefix="/upload", tags=["Upload"])
 app.include_router(analysis.router, prefix="/data", tags=["Analysis"])
 app.include_router(view.router, prefix="/view", tags=["Analysis"])
+app.include_router(delete.router, prefix='/delete', tags=["Delete"])
 
 def get_local_ip():
     s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)

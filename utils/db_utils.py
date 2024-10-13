@@ -8,6 +8,9 @@ collection = db["analysis"]
 def insert_analysis(analysis: dict):
     collection.insert_one(analysis)
 
+def delete_analysis(video_id: str):
+    collection.delete_one({'video_id': video_id})
+
 def get_analysis_by_video_id(video_id: str) -> dict:
     analysis_data = collection.find_one({"video_id": video_id})
     if analysis_data:
