@@ -14,6 +14,7 @@ async def delete_analysis(video_id: str):
             print("Deleted original video.")
         else:
             return JSONResponse(content={"success": False}, status_code=404)
+        response = external_api.delete_video(analysis_data['analysis']['video_id'])
         if response['detail'] == 'Video deleted successfully':
             print("Deleted annotated video.")
         else:
